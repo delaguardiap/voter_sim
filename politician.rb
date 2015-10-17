@@ -1,10 +1,9 @@
 class Politician < Character
+  @@party_array = ["Democrat", "Republican"]
 
   def initialize
     @party = politician_creator(@@party_array)
   end
-
-  @@party_array = ["Democrat", "Republican"]
 
   def politician_creator parties
     puts "What is the Politician's name?"
@@ -20,13 +19,8 @@ class Politician < Character
     when "1" then @@party_array[0]
     when "2" then @@party_array[1]
     else
-      puts "That was not a valid choice"
+      puts "That was not a valid choice. Try again."
       politician_creator parties
     end
   end
-
-  def self.all
-    ObjectSpace.each_object(self).to_a
-  end
-
 end
