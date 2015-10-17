@@ -1,5 +1,5 @@
 class Politician < Character
-  @@party_array = ["Democrat", "Republican"]
+  attr_accessor :party
 
   def initialize
     @party = politician_creator(@@party_array)

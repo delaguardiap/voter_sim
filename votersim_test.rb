@@ -3,7 +3,8 @@ require_relative "voter"
 require_relative "politician"
 require_relative "world"
 
+# politician = Politician.new
+# p Politician.all
 
-fg = Voter.new
-p Voter.all
-# p bill = Politician.new
+voter = Voter.new
+p voter

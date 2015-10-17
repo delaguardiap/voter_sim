@@ -1,5 +1,5 @@
 class Voter < Character
-  @@ideology_array = ["Liberal", "Conservative", "Tea Party", "Socialist", "Neutral"]
+  attr_accessor :ideology
 
   def initialize
     @ideology = voter_creator(@@ideology_array)
