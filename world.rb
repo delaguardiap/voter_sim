@@ -6,8 +6,8 @@ class World
   @@home_town_fav_republican = 0
 
   def self.voter_sim
-    @@dem_vote = 0
-    @@rep_vote = 0
+    @@dem_vote = 1
+    @@rep_vote = 1
     @@home_town_fav_democrat = 0
     @@home_town_fav_republican = 0
     if sim_check
@@ -86,9 +86,9 @@ class World
     elsif roll > 100
       roll = 100
     else
-      roll
+     roll
     end
-    roll.between?(0, 24) ? @@dem_vote += 1 : @@rep_vote += 1
+     roll.between?(0, 24) ? @@dem_vote += 1 : @@rep_vote += 1
   end
 
   def self.tea_party_vote(voter, politicians)
@@ -98,13 +98,13 @@ class World
     elsif roll > 100
       roll = 100
     else
-      roll
+     roll
     end
-    roll.between?(0, 9) ? @@dem_vote += 1 : @@rep_vote += 1
+     roll.between?(0, 9) ? @@dem_vote += 1 : @@rep_vote += 1
   end
 
   def self.socialist_vote(voter, politicians)
-    roll = home_town_fav_check(voter, politicians)
+     roll = home_town_fav_check(voter, politicians)
      if roll < 0
        roll = 0
      elsif roll > 100
@@ -112,15 +112,17 @@ class World
      else
        roll
      end
-    roll.between?(0, 89) ? @@dem_vote += 1 : @@rep_vote += 1
+     roll.between?(0, 89) ? @@dem_vote += 1 : @@rep_vote += 1
   end
 
   def self.neutral_vote(voter, politicians)
     roll = home_town_fav_check(voter, politicians)
     if roll < 0
       roll = 0
-    else roll > 100
+    elsif roll > 100
       roll = 100
+    else
+      roll
     end
     roll.between?(0, 49) ? @@dem_vote += 1 : @@rep_vote += 1
   end
