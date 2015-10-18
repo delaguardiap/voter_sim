@@ -8,6 +8,8 @@ class Voter < Character
   def voter_creator ideologies
     puts "What is the voter's name?"
     @name = gets.chomp
+    puts "What region is the Voter from?"
+    @region = Character.region_select
     puts "Select voter's party affiliation:"
     index = 1
     ideologies.each do |ideo|

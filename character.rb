@@ -3,11 +3,31 @@ class Character
 
   @@party_array = ["Democrat", "Republican"]
   @@ideology_array = ["Liberal", "Conservative", "Tea Party", "Socialist", "Neutral"]
+  @@region_array = ["North", "East", "South", "West"]
 
   def initialize
     @name
     @region
   end
+
+  def self.region_select
+    index = 1
+    @@region_array.each do |region|
+      puts "#{index} #{region}"
+      index += 1
+    end
+    choice = gets.chomp
+    case choice
+    when "1" then @@region_array[0]
+    when "2" then @@region_array[1]
+    when "3" then @@region_array[2]
+    when "4" then @@region_array[3]
+    else
+      puts "That was not a valid choice. Try again."
+      region_select
+    end
+  end
+
 
   def self.all
     ObjectSpace.each_object(self).to_a
@@ -18,7 +38,7 @@ class Character
       puts "Sorry, the list is empty. Select 'Create' to add voters or politicians."
     else
       i = 1
-      ObjectSpace.each_object(self).to_a.each do |character|
+        ObjectSpace.each_object(self).to_a.each do |character|
         if character.is_a? Politician
           puts "#{i}-#{character.name}, #{character.party}, Region: #{character.region}"
           i+=1

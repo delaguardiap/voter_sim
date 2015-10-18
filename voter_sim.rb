@@ -22,28 +22,46 @@ end
 
 
 def create
-  puts "Would you like to create a (P)olitition or (V)oter?"
-  answer = gets.chomp.downcase
-  if answer == "p"
-    politician = Politician.new
-    puts "#{politician.name} was successfully created."
-  elsif answer == "v"
-    voter = Voter.new
-    puts "#{voter.name} was successfully created."
+  if World.politician_check == false
+    puts "Would you like to create a (P)olitition or (V)oter? (M)ain menu."
+    answer = gets.chomp.downcase
+    if answer == "p"
+      politician = Politician.new
+      puts "#{politician.name} was successfully created."
+    elsif answer == "v"
+      voter = Voter.new
+      puts "#{voter.name} was successfully created."
+    elsif answer == "m"
+      main_menu
+    else
+      puts "That was not a valid choice. Try again."
+     create
+    end
   else
-    puts "That was not a valid choice. Try again."
-   create
+    puts "Would you like to create a (V)oter? (M)ain menu"
+    answer = gets.chomp.downcase
+    if answer == "v"
+      voter = Voter.new
+      puts "#{voter.name} was successfully created."
+    elsif answer == "m"
+      main_menu
+    else
+      puts "That was not a valid choice. Try again"
+      create
+    end
   end
   main_menu
 end
 
 def list
-  puts "Would you like a list of (P)olititions or (V)oters? "
+  puts "Would you like a list of (P)olititions or (V)oters? (M)ain menu."
   answer = gets.chomp.downcase
   if answer == "p"
     Politician.list
   elsif answer == "v"
     Voter.list
+  elsif answer == "m"
+    main_menu
   else
     puts "That was not a valid choice. Try again."
     list
@@ -52,7 +70,7 @@ def list
 end
 
 def update
-  puts "Would you update a (P)olitition or (V)oter? "
+  puts "Would you update a (P)olitition or (V)oter? (M)ain menu."
   answer = gets.chomp.downcase
   if answer == "p"
     Politician.list
@@ -64,6 +82,8 @@ def update
     puts "Enter voter number"
     poli_number = gets.chomp.to_i
     Voter.update(Voter.all[poli_number-1])
+  elsif answer == "m"
+    main_menu
   else
     puts "That was not a valid choice. Try again."
     update
