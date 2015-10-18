@@ -4,6 +4,18 @@ class World
   @@rep_vote = 0
   @@home_town_fav_democrat = 0
   @@home_town_fav_republican = 0
+  @@dem_vote_modifier = 0
+  @@rep_vote_modifier = 0
+
+
+
+  def self.dem_vote_modifier_set value
+    @@dem_vote_modifier += value
+  end
+
+  def self.rep_vote_modifier_set value
+    @@rep_vote_modifier += value
+  end
 
   def self.voter_sim
     @@dem_vote = 1
@@ -52,16 +64,20 @@ class World
      rand(99)
     elsif politicians[0].region == voter.region && politicians[0].party == "Democrat"
       @@home_town_fav_democrat += 1
-      rand(99) - 10
+      @@dem_vote_modifier += 10
+      rand(99) - @@dem_vote_modifier
     elsif politicians[1].region == voter.region && politicians[1].party == "Democrat"
       @@home_town_fav_democrat += 1
-      rand(99) - 10
+      @@dem_vote_modifier += 10
+      rand(99) - @@dem_vote_modifier
     elsif politicians[0].region == voter.region && politicians[0].party == "Republican"
       @@home_town_fav_republican += 1
-      rand(99) + 10
-    elsif politicians[1].region == voter.region && politicians[1].party == "Republican"
+      @@rep_vote_modifier += 10
+      rand(99) - @@rep_vote_modifier
+      elsif politicians[1].region == voter.region && politicians[1].party == "Republican"
       @@home_town_fav_republican += 1
-      rand(99) + 10
+      @@rep_vote_modifier += 10
+      rand(99) - @@rep_vote_modifier
     else
       rand(99)
     end
@@ -162,8 +178,8 @@ class World
      end
    else
      vote_tally
-     puts "Its a draw, cage battle to death!"
+     puts "Its a draw, cage battle to the death!"
+     puts "After a brutal fight #{Politician.all.sample.name} has emerged victorious."
    end
   end
-
 end

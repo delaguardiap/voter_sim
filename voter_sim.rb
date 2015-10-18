@@ -2,7 +2,7 @@ require_relative "character"
 require_relative "voter"
 require_relative "politician"
 require_relative "world"
-require "CSV"
+#require "CSV"
 
 def start
 
@@ -91,6 +91,26 @@ def update
   main_menu
 end
 
+def modifiers
+
+  puts <<-EOP
+    How would you like to add flavor to this election?
+    -------------------------------------------------------------------------
+    1- Popular republican candidate.
+    2- Popular democratic candidate
+  EOP
+  answer = gets.chomp
+
+  case answer
+  when "1" then World.rep_vote_modifier_set 30; puts "It's like Lincoln came back to life. Republican chance of winning increased."
+  when "2" then World.dem_vote_modifier_set 30; "Good old Franklin D. Roosevelt has nothing on you. Democrat chance of winning increased."
+  else
+    puts "That was not a valid choice."
+    modifiers
+  end
+  main_menu
+end
+
 def vote
   World.voter_sim
   main_menu
@@ -108,26 +128,22 @@ def main_menu
     (C)reate
     (I)mport Voters
     (L)ist
-    (U)pate
+    (U)pdate
     (V)ote
+    (M)odifiers
     (Q)uit
   EOP
 
   answer = gets.chomp.downcase
 
   case answer
-    when "c"
-      create
-    when "l"
-      list
-    when "u"
-      update
-    when "v"
-      vote
-    when "i"
-      load_voters
-    when "q"
-      exit
+    when "c" then create
+    when "l" then list
+    when "u" then update
+    when "v" then vote
+    when "m" then modifiers
+    when "i" then load_voters
+    when "q" then exit
     else
       puts "That was not a valid choice. Try again."
       start
