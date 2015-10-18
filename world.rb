@@ -63,6 +63,9 @@ class World
       Politician.all.each do |pol|
        if pol.party == "Republican"
          puts "The winner is #{pol.name}!"
+         puts "Total votes cast: #{@@rep_vote + @@dem_vote}"
+         puts "Total Republican votes: #{@@rep_vote}"
+         puts "Total Democrat votes:   #{@@dem_vote}"
        end
      end
    else

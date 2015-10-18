@@ -20,10 +20,10 @@ class Character
       i = 1
       ObjectSpace.each_object(self).to_a.each do |character|
         if character.is_a? Politician
-          puts "#{i}-#{character.name} #{character.party}"
+          puts "#{i}-#{character.name}, #{character.party}, Region: #{character.region}"
           i+=1
         else
-          puts "#{i}-#{character.name} #{character.ideology}"
+          puts "#{i}-#{character.name}, #{character.ideology}, Region: #{character.region}"
           i+=1
         end
       end
@@ -57,6 +57,7 @@ class Character
         if answer == "n"
           puts "Enter new name."
           character.name = gets.chomp
+          puts "Name updated to #{character.name}."
         elsif answer == "i"
           index = 1
           @@ideology_array.each do |ideology|

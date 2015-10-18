@@ -2,6 +2,7 @@ require_relative "character"
 require_relative "voter"
 require_relative "politician"
 require_relative "world"
+require "CSV"
 
 def start
 
@@ -72,6 +73,12 @@ end
 
 def vote
   World.voter_sim
+  main_menu
+end
+
+def load_voters
+  Voter.load_voters
+  main_menu
 end
 
 def main_menu
@@ -79,9 +86,11 @@ def main_menu
      What can we da ya fer?
     ----------------------
     (C)reate
+    (I)mport Voters
     (L)ist
     (U)pate
     (V)ote
+    (Q)uit
   EOP
 
   answer = gets.chomp.downcase
@@ -95,6 +104,10 @@ def main_menu
       update
     when "v"
       vote
+    when "i"
+      load_voters
+    when "q"
+      exit
     else
       puts "That was not a valid choice. Try again."
       start
