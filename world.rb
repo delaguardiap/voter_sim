@@ -8,6 +8,8 @@ class World
   def self.voter_sim
     @@dem_vote = 0
     @@rep_vote = 0
+    @@home_town_fav_democrat = 0
+    @@home_town_fav_republican = 0
     if sim_check
       Voter.all.each do |voter|
         case voter.ideology
@@ -46,8 +48,6 @@ class World
   end
 
   def self.home_town_fav_check(voter, politicians)
-    @@home_town_fav_democrat = 0
-    @@home_town_fav_republican = 0
      if politicians[0].region == politicians[1].region
      rand(99)
     elsif politicians[0].region == voter.region && politicians[0].party == "Democrat"
