@@ -5,6 +5,8 @@ require_relative "world"
 
 def start
 
+  system("clear")
+
   puts <<-EOP
   **********************************************************
   //  Welcome to the PBR Ultimate voter simulation game!  //

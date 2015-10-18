@@ -1,7 +1,9 @@
 class Character
   attr_accessor :name, :region
+
   @@party_array = ["Democrat", "Republican"]
   @@ideology_array = ["Liberal", "Conservative", "Tea Party", "Socialist", "Neutral"]
+
   def initialize
     @name
     @region
@@ -12,14 +14,18 @@ class Character
   end
 
   def self.list
-    i = 1
-    ObjectSpace.each_object(self).to_a.each do |character|
-      if character.is_a? Politician
-        puts "#{i}-#{character.name} #{character.party}"
-        i+=1
-      else
-        puts "#{i}-#{character.name} #{character.ideology}"
-        i+=1
+    if ObjectSpace.each_object(self).to_a.empty?
+      puts "Sorry, the list is empty. Select 'Create' to add voters or politicians."
+    else
+      i = 1
+      ObjectSpace.each_object(self).to_a.each do |character|
+        if character.is_a? Politician
+          puts "#{i}-#{character.name} #{character.party}"
+          i+=1
+        else
+          puts "#{i}-#{character.name} #{character.ideology}"
+          i+=1
+        end
       end
     end
   end
