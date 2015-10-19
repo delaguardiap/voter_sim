@@ -3,7 +3,7 @@ require_relative "voter"
 require_relative "politician"
 require_relative "world"
 require "CSV"
-
+#intro to program with a clear screen command
 def start
 
   system("clear")
@@ -20,6 +20,8 @@ def start
 
 end
 
+#Choice to create voter or politician. Check to see if 2 opposing politicians
+#already created, if so option to create politician removed.
 
 def create
   if World.politician_check == false
@@ -103,24 +105,24 @@ def modifiers
 
   case answer
   when "1" then World.rep_vote_modifier_set 30; puts "It's like Lincoln came back to life. Republican chance of winning increased."
-  when "2" then World.dem_vote_modifier_set 30; "Good old Franklin D. Roosevelt has nothing on you. Democrat chance of winning increased."
+  when "2" then World.dem_vote_modifier_set 30; puts "Good old Franklin D. Roosevelt has nothing on you. Democrat chance of winning increased."
   else
     puts "That was not a valid choice."
     modifiers
   end
   main_menu
 end
-
+# Run the voter simulation in the world class
 def vote
   World.voter_sim
   main_menu
 end
-
+#link to method that imports voters from CSV file
 def load_voters
   Voter.load_voters
   main_menu
 end
-
+# default menu
 def main_menu
   puts <<-EOP
      What can we da ya fer?

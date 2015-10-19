@@ -4,7 +4,7 @@ class Voter < Character
   def initialize(ideology = voter_creator(@@ideology_array))
     @ideology = ideology
   end
-
+  # create new voter from user input with feedback that voter was created
   def voter_creator ideologies
     puts "What is the voter's name?"
     @name = gets.chomp
@@ -12,7 +12,7 @@ class Voter < Character
     @region = Character.region_select
     puts "Select voter's party affiliation:"
     index = 1
-    ideologies.each do |ideo|
+    ideologies.each do |ideo| #lists ideologies for user to select
       puts "#{index} #{ideo}"
       index += 1
     end
@@ -29,6 +29,8 @@ class Voter < Character
     end
   end
 
+  # method to import CSV data to Voter class with feedback as to number
+  #of voters created
   def self.load_voters
     voters = CSV.read("./voters.csv")
     voters_loaded_count = 0
