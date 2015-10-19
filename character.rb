@@ -10,7 +10,7 @@ class Character
     @name
     @region
   end
-
+  #testing comment
   #Region selector
   def self.region_select
     index = 1
