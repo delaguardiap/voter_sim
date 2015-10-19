@@ -105,7 +105,7 @@ def modifiers
 
   case answer
   when "1" then World.rep_vote_modifier_set 30; puts "It's like Lincoln came back to life. Republican chance of winning increased."
-  when "2" then World.dem_vote_modifier_set 30; puts "Good old Franklin D. Roosevelt has nothing on you. Democrat chance of winning increased."
+  when "2" then World.dem_vote_modifier_set -30; puts "Good old Franklin D. Roosevelt has nothing on you. Democrat chance of winning increased."
   else
     puts "That was not a valid choice."
     modifiers

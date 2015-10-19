@@ -10,11 +10,11 @@ class World
 
   #vote modifiers will
   def self.dem_vote_modifier_set value
-    @@dem_vote_modifier += value
+    @@dem_vote_modifier = value
   end
 
   def self.rep_vote_modifier_set value
-    @@rep_vote_modifier += value
+    @@rep_vote_modifier = value
   end
 
   #Will go through each element of the voter's array and will call one of the 5 vote function on said voter
@@ -66,31 +66,19 @@ class World
   #It will improve the chances of the voter voting for the politician.
   def self.home_town_fav_check(voter, politicians)
      if politicians[0].region == politicians[1].region
-     rand(99)
+       rand(99)
     elsif politicians[0].region == voter.region && politicians[0].party == "Democrat"
       @@home_town_fav_democrat += 1
-      @@dem_vote_modifier += 10
-      roll = rand(99) - @@dem_vote_modifier
-      @@dem_vote_modifier = 0
-      roll
+      rand(99) - 10
     elsif politicians[1].region == voter.region && politicians[1].party == "Democrat"
       @@home_town_fav_democrat += 1
-      @@dem_vote_modifier += 10
-      roll = rand(99) - @@dem_vote_modifier
-      @@dem_vote_modifier = 0
-      roll
+      rand(99) - 10
     elsif politicians[0].region == voter.region && politicians[0].party == "Republican"
       @@home_town_fav_republican += 1
-      @@rep_vote_modifier += 10
-      roll = rand(99) - @@rep_vote_modifier
-      @@rep_vote_modifier = 0
-      roll
-      elsif politicians[1].region == voter.region && politicians[1].party == "Republican"
+      rand(99) + 10
+    elsif politicians[1].region == voter.region && politicians[1].party == "Republican"
       @@home_town_fav_republican += 1
-      @@rep_vote_modifier += 10
-      roll = rand(99) - @@rep_vote_modifier
-      @@rep_vote_modifier = 0
-      roll
+      rand(99) + 10
     else
       rand(99)
     end
@@ -99,6 +87,7 @@ class World
   #Voting methods
   def self.liberal_vote(voter, politicians)
     roll = home_town_fav_check(voter, politicians)
+    roll += (@@dem_vote_modifier + @@rep_vote_modifier)
     if roll < 0
       roll = 0
     elsif roll > 100
@@ -111,6 +100,7 @@ class World
 
   def self.conservative_vote(voter, politicians)
     roll = home_town_fav_check(voter, politicians)
+    roll += (@@dem_vote_modifier + @@rep_vote_modifier)
     if roll < 0
       roll = 0
     elsif roll > 100
@@ -123,6 +113,7 @@ class World
 
   def self.tea_party_vote(voter, politicians)
     roll = home_town_fav_check(voter, politicians)
+    roll += (@@dem_vote_modifier + @@rep_vote_modifier)
     if roll < 0
       roll = 0
     elsif roll > 100
@@ -135,6 +126,7 @@ class World
 
   def self.socialist_vote(voter, politicians)
      roll = home_town_fav_check(voter, politicians)
+     roll += (@@dem_vote_modifier + @@rep_vote_modifier)
      if roll < 0
        roll = 0
      elsif roll > 100
@@ -147,6 +139,7 @@ class World
 
   def self.neutral_vote(voter, politicians)
     roll = home_town_fav_check(voter, politicians)
+    roll += (@@dem_vote_modifier + @@rep_vote_modifier)
     if roll < 0
       roll = 0
     elsif roll > 100
