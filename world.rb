@@ -70,19 +70,27 @@ class World
     elsif politicians[0].region == voter.region && politicians[0].party == "Democrat"
       @@home_town_fav_democrat += 1
       @@dem_vote_modifier += 10
-      rand(99) - @@dem_vote_modifier
+      roll = rand(99) - @@dem_vote_modifier
+      @@dem_vote_modifier = 0
+      roll
     elsif politicians[1].region == voter.region && politicians[1].party == "Democrat"
       @@home_town_fav_democrat += 1
       @@dem_vote_modifier += 10
-      rand(99) - @@dem_vote_modifier
+      roll = rand(99) - @@dem_vote_modifier
+      @@dem_vote_modifier = 0
+      roll
     elsif politicians[0].region == voter.region && politicians[0].party == "Republican"
       @@home_town_fav_republican += 1
       @@rep_vote_modifier += 10
-      rand(99) - @@rep_vote_modifier
+      roll = rand(99) - @@rep_vote_modifier
+      @@rep_vote_modifier = 0
+      roll
       elsif politicians[1].region == voter.region && politicians[1].party == "Republican"
       @@home_town_fav_republican += 1
       @@rep_vote_modifier += 10
-      rand(99) - @@rep_vote_modifier
+      roll = rand(99) - @@rep_vote_modifier
+      @@rep_vote_modifier = 0
+      roll
     else
       rand(99)
     end
@@ -120,7 +128,7 @@ class World
     elsif roll > 100
       roll = 100
     else
-     roll
+      roll
     end
      roll.between?(0, 9) ? @@dem_vote += 1 : @@rep_vote += 1
   end
