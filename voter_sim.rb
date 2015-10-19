@@ -2,7 +2,7 @@ require_relative "character"
 require_relative "voter"
 require_relative "politician"
 require_relative "world"
-#require "CSV"
+require "CSV"
 
 def start
 

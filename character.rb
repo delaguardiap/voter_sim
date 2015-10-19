@@ -1,6 +1,7 @@
 class Character
   attr_accessor :name, :region
 
+  #Class variables.
   @@party_array = ["Democrat", "Republican"]
   @@ideology_array = ["Liberal", "Conservative", "Tea Party", "Socialist", "Neutral"]
   @@region_array = ["North", "East", "South", "West"]
@@ -10,6 +11,7 @@ class Character
     @region
   end
 
+  #Region selector
   def self.region_select
     index = 1
     @@region_array.each do |region|
@@ -33,6 +35,7 @@ class Character
     ObjectSpace.each_object(self).to_a
   end
 
+  #Will display all of the characters
   def self.list
     if ObjectSpace.each_object(self).to_a.empty?
       puts "Sorry, the list is empty. Select 'Create' to add voters or politicians."
@@ -50,6 +53,7 @@ class Character
     end
   end
 
+  #Create and updates methods
   def self.update character
       if character.is_a? Politician
         puts "You are changing #{character.name} who is #{character.party}."

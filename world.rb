@@ -1,5 +1,6 @@
 class World
 
+  #Set of class variables which will keep track of most counters.
   @@dem_vote = 0
   @@rep_vote = 0
   @@home_town_fav_democrat = 0
@@ -7,8 +8,7 @@ class World
   @@dem_vote_modifier = 0
   @@rep_vote_modifier = 0
 
-
-
+  #vote modifiers will
   def self.dem_vote_modifier_set value
     @@dem_vote_modifier += value
   end
@@ -17,6 +17,8 @@ class World
     @@rep_vote_modifier += value
   end
 
+  #Will go through each element of the voter's array and will call one of the 5 vote function on said voter
+  #depending on his ideology.
   def self.voter_sim
     @@dem_vote = 1
     @@rep_vote = 1
@@ -40,6 +42,7 @@ class World
     end
   end
 
+  #General validation to run the simulation
   def self.sim_check
     Voter.all.count > 0 && politician_check
   end
@@ -59,6 +62,8 @@ class World
     rep_found && dem_found
   end
 
+  #Will check if the voter and politician are from the same region, in case they
+  #It will improve the chances of the voter voting for the politician.
   def self.home_town_fav_check(voter, politicians)
      if politicians[0].region == politicians[1].region
      rand(99)
@@ -83,6 +88,7 @@ class World
     end
   end
 
+  #Voting methods
   def self.liberal_vote(voter, politicians)
     roll = home_town_fav_check(voter, politicians)
     if roll < 0
@@ -152,6 +158,7 @@ class World
     end
   end
 
+  #A methods that displays the election's results
   def self.vote_tally
     puts "Total votes cast: #{@@rep_vote + @@dem_vote}"
     puts "Total Republican votes: #{@@rep_vote}"
@@ -160,6 +167,7 @@ class World
     puts "Hometown Republican favorite bonus: #{@@home_town_fav_republican}"
   end
 
+  #A methods that calculates the winner
   def self.winner
     puts "The results are in!"
     if @@dem_vote > @@rep_vote
