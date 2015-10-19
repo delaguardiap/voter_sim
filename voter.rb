@@ -32,16 +32,22 @@ class Voter < Character
   # method to import CSV data to Voter class with feedback as to number
   #of voters created
   def self.load_voters
-    puts "Please enter the file name:"
+    puts "Please enter the file name or (M)ain Menu:"
     file_name = gets.chomp
-    voters = CSV.read("./#{file_name}")
-    voters_loaded_count = 0
-    voters.each do |voter|
-      if voter[0]
-        new_voter = Voter.new(voter[1])
-        new_voter.name = voter[0]
-        new_voter.region = voter[2]
-        voters_loaded_count += 1
+    if file_name == ""
+      main_menu
+    elsif file_name.downcase == "m"
+      main_menu
+    else
+      voters = CSV.read("./#{file_name}")
+      voters_loaded_count = 0
+      voters.each do |voter|
+        if voter[0]
+          new_voter = Voter.new(voter[1])
+          new_voter.name = voter[0]
+          new_voter.region = voter[2]
+          voters_loaded_count += 1
+        end
       end
     end
     puts "#{voters_loaded_count} voters loaded."

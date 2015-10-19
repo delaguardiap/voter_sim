@@ -24,7 +24,7 @@ end
 #already created, if so option to create politician removed.
 
 def create
-  if World.politician_check == false
+  if !World.politician_check && Politician.all.count < 2
     puts "Would you like to create a (P)olitition or (V)oter? (M)ain menu."
     answer = gets.chomp.downcase
     if answer == "p"
@@ -100,12 +100,14 @@ def modifiers
     -------------------------------------------------------------------------
     1- Popular republican candidate.
     2- Popular democratic candidate
+    (M)ain Menu
   EOP
-  answer = gets.chomp
+  answer = gets.chomp.downcase
 
   case answer
   when "1" then World.rep_vote_modifier_set 30; puts "It's like Lincoln came back to life. Republican chance of winning increased."
   when "2" then World.dem_vote_modifier_set -30; puts "Good old Franklin D. Roosevelt has nothing on you. Democrat chance of winning increased."
+  when "m" then main_menu
   else
     puts "That was not a valid choice."
     modifiers
@@ -119,8 +121,13 @@ def vote
 end
 #link to method that imports voters from CSV file
 def load_voters
-  Voter.load_voters
-  main_menu
+  begin
+    Voter.load_voters
+  rescue
+    puts "Invalid file name. Please try again."
+    sleep 1
+    Voter.load_voters
+  end
 end
 # default menu
 def main_menu
