@@ -127,6 +127,7 @@ def load_voters
     puts "Invalid file name. Please try again."
     sleep 1
     Voter.load_voters
+    main_menu
   end
 end
 # default menu
