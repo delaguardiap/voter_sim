@@ -51,5 +51,6 @@ class Voter < Character
       end
     end
     puts "#{voters_loaded_count} voters loaded."
+    main_menu
   end
 end
